@@ -22,7 +22,16 @@ return {
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
     -- quick save
-    -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
+    ["<C-s>"] = { "<cmd>w!<cr><esc>", desc = "Save File" },
+  },
+  i = {
+    ["<C-s>"] = { "<cmd>w!<cr><esc>", desc = "Save File" },
+  },
+  v = {
+    ["<C-s>"] = { "<cmd>w!<cr><esc>", desc = "Save File" },
+  },
+  s = {
+    ["<C-s>"] = { "<cmd>w!<cr><esc>", desc = "Save File" },
   },
   t = {
     -- setting a mapping to false will disable it
