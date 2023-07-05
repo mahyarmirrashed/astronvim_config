@@ -68,18 +68,17 @@ return {
   -- This function is run last and is a good place to configuring
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
+
+  -- Assosciate Jenkinsfile with groovy filetype
   polish = function()
-    -- Set up custom filetypes
-    -- vim.filetype.add {
-    --   extension = {
-    --     foo = "fooscript",
-    --   },
-    --   filename = {
-    --     ["Foofile"] = "fooscript",
-    --   },
-    --   pattern = {
-    --     ["~/%.config/foo/.*"] = "fooscript",
-    --   },
-    -- }
+    vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+      pattern = { "Jenkinsfile" },
+      callback = function()
+        vim.cmd("set filetype=groovy")
+        vim.bo.shiftwidth = 4
+        vim.bo.tabstop = 4
+        vim.bo.expandtab = true
+      end
+    })
   end,
 }
