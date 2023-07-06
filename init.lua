@@ -68,6 +68,8 @@ return {
   polish = function()
     -- create augroups to easily manage autocommands
     vim.api.nvim_create_augroup("file_associations", { clear = true })
+    vim.api.nvim_create_augroup("kitty_background", { clear = true })
+
     -- assosciate Jenkinsfile with groovy filetype
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
       desc = "associate Jenkinsfile with the .groovy file type",
@@ -80,5 +82,45 @@ return {
         vim.bo.expandtab = true
       end
     })
+
+    -- change kitty background to nvim's background while in nvim, then revert back
+    if vim.env.KITTY_LISTEN_ON then
+      local cmd = require("astronvim.utils").cmd
+      local function set_bg(color) cmd { "kitty", "@", "set-colors", ("background=%s"):format(color) } end
+
+      local orig_bg = "#300a24" -- hardcoded terminal fallback
+
+      for _, color in ipairs(vim.fn.split(cmd { "kitty", "@", "get-colors" } or "", "\n")) do
+        local current_bg = color:match "^background%s+(#[0-9a-fA-F]+)$"
+
+        if current_bg then
+          orig_bg = current_bg
+          break
+        end
+      end
+
+      local augroup = vim.api.nvim_create_augroup("kitty_background", { clear = true })
+
+      vim.api.nvim_create_autocmd("User", {
+        desc = "set kitty background to colorscheme's background",
+        -- triggered when colorscheme is changed and `highlights` table is applied
+        pattern = "AstroColorScheme", -- pattern is name of our User autocommand events
+        group = augroup,              -- add autocmd to augroup
+        callback = function()
+          local bg_color = require("astronvim.utils").get_hlgroup("Normal")
+              .bg                                                                            -- easy utility to get highlight group
+          if not bg_color then return end                                                    -- if no Normal background color is set the do nothing
+          if type(bg_color) == "number" then bg_color = string.format("#%06x", bg_color) end -- if number, make string
+
+          set_bg(bg_color)
+        end,
+      })
+
+      vim.api.nvim_create_autocmd("VimLeave", {
+        desc = "set kitty background back to original background",
+        group = augroup, -- add autocmd to augroup
+        callback = function() set_bg(orig_bg) end,
+      })
+    end
   end,
 }
