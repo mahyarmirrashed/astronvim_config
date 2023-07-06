@@ -69,6 +69,7 @@ return {
   polish = function()
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
       pattern = { "Jenkinsfile" },
+      desc = "associate Jenkinsfile with the .groovy file type",
       callback = function()
         vim.cmd("set filetype=groovy")
         vim.bo.shiftwidth = 4
