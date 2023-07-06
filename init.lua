@@ -70,8 +70,8 @@ return {
     vim.api.nvim_create_augroup("file_associations", { clear = true })
     -- assosciate Jenkinsfile with groovy filetype
     vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-      pattern = { "Jenkinsfile" },
       desc = "associate Jenkinsfile with the .groovy file type",
+      pattern = "Jenkinsfile",
       group = "file_associations",
       callback = function()
         vim.cmd("set filetype=groovy")
