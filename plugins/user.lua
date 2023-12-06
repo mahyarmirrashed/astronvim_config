@@ -13,6 +13,9 @@ return {
     "folke/todo-comments.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
-    event = "VeryLazy",
+    event = "User AstroFile",
+    keys = {
+      { "<leader>tt", "<cmd>TodoTelescope<cr>", desc = "Open TODOs in Telescope" },
+    },
   },
 }
