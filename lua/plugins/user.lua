@@ -1,14 +1,29 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- Here are some examples:
 
 ---@type LazySpec
 return {
+  {
+    "folke/todo-comments.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    event = "User AstroFile",
+    keys = {
+      {
+        "<leader>tT",
+        "<cmd>TodoTelescope<cr>",
+        desc = "Open TODOs in Telescope",
+      },
+    },
+  },
 
   -- == Examples of Adding Plugins ==
+  {
+    "andweeb/presence.nvim",
+    enabled = false,
+  },
 
-  "andweeb/presence.nvim",
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
