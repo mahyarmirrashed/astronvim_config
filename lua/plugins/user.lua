@@ -13,6 +13,7 @@ return {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
     config = function() require("lsp_signature").setup() end,
+    enabled = false,
   },
 
   -- == Examples of Overriding Plugins ==
@@ -37,10 +38,14 @@ return {
       }
       return opts
     end,
+    enabled = false,
   },
 
   -- You can disable default plugins as follows:
-  { "max397574/better-escape.nvim", enabled = false },
+  {
+    "max397574/better-escape.nvim",
+    enabled = false,
+  },
 
   -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
   {
@@ -51,6 +56,7 @@ return {
       local luasnip = require "luasnip"
       luasnip.filetype_extend("javascript", { "javascriptreact" })
     end,
+    enabled = false,
   },
 
   {
@@ -81,5 +87,6 @@ return {
         Rule("a", "a", "-vim")
       )
     end,
+    enabled = false,
   },
 }
