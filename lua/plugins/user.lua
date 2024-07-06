@@ -102,6 +102,5 @@ return {
         Rule("a", "a", "-vim")
       )
     end,
-    enabled = false,
   },
 }
