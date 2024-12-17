@@ -20,6 +20,7 @@ return {
   { import = "astrocommunity.pack.terraform" },
   { import = "astrocommunity.pack.toml" },
   { import = "astrocommunity.pack.typescript" },
+  { import = "astrocommunity.pack.typst" },
   { import = "astrocommunity.pack.vue" },
   { import = "astrocommunity.pack.yaml" },
   { import = "astrocommunity.colorscheme.catppuccin" },
